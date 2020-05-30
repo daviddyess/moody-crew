@@ -33,13 +33,15 @@ if (module.hot) {
 sagaMiddleware.run(rootSaga);
 
 ReactDOM.render(
-  <Router basename="/">
-    <LastLocationProvider>
-      <Provider store={store}>
-        <App />
-      </Provider>
-    </LastLocationProvider>
-  </Router>,
+  <React.StrictMode>
+    <Router basename="/">
+      <LastLocationProvider>
+        <Provider store={store}>
+          <App />
+        </Provider>
+      </LastLocationProvider>
+    </Router>
+  </React.StrictMode>,
   document.getElementById('root')
 );
 

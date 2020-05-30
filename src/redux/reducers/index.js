@@ -1,17 +1,17 @@
 import { combineReducers } from 'redux';
 
-// Repeat imports for each reducer
-import {
-  reducer as example,
-  initialState as exampleState
-} from './example';
+import { reducer as server, initialState as serverState } from './server';
+import { reducer as stats, initialState as statsState } from './stats';
+import { reducer as steam, initialState as steamState } from './steam';
 
-// Add Each to be included in initialState (comma separated: example: exampleState, app: appState, toast: toastState)
 export const initialState = {
-  example: exampleState
+  server: serverState,
+  stats: statsState,
+  steam: steamState
 };
 
-// Add each using 'as' of import above (comma separated: example, app, toast)
 export default combineReducers({
-  example
+  server,
+  stats,
+  steam
 });

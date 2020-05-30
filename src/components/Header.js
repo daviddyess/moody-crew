@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link, NavLink } from 'react-router-dom';
-import { Container, Dropdown, Form, Navbar, Nav } from 'react-bootstrap';
+import { Container, Navbar, Nav } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export class Header extends Component {
@@ -13,38 +13,17 @@ export class Header extends Component {
       <Container fluid>
         <Navbar bg="dark" variant="dark" expand="lg">
           <Navbar.Brand as={Link} to="/">
-            React Boilerplate
+            <h3 className="text-primary">Moody Crew</h3>
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="mr-auto">
+            <Nav className="">
               <Nav.Link as={NavLink} to="/">
                 Home
               </Nav.Link>
-            </Nav>
-            <Form inline action="/search" method="get">
-              <Form.Control
-                type="text"
-                placeholder="Search"
-                className="mr-sm-2"
-                name="q"
-              />
-            </Form>
-            <Nav>
-              <Dropdown alignRight>
-                <Dropdown.Toggle variant="primary" id="user-dropdown">
-                  {this.userIcon} User
-                </Dropdown.Toggle>
-                <Dropdown.Menu>
-                  <Dropdown.Item as={NavLink} to="/user">
-                    Account
-                  </Dropdown.Item>
-                  <Dropdown.Divider />
-                  <Dropdown.Item as={NavLink} to="/login">
-                    Logout
-                  </Dropdown.Item>
-                </Dropdown.Menu>
-              </Dropdown>
+              <Nav.Link as={NavLink} to="/stats">
+                Player Stats
+              </Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Navbar>

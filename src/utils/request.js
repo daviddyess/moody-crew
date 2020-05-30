@@ -1,11 +1,11 @@
 import axios from 'axios';
-import { buildUrl } from '../utils';
+import { buildUrl } from 'utils';
 import { call, race, delay } from 'redux-saga/effects';
 
 /**
  * Based on code by:
  * @author ayan4m1 <https://github.com/ayan4m1>
- * As of 20191117
+ * As of 20200504
  * Modified by:
  * @author daviddyess <https://github.com/daviddyess>
  */
@@ -15,7 +15,7 @@ import { call, race, delay } from 'redux-saga/effects';
  *
  * @param {object} response The response body
  */
-const successResponse = response => ({
+const successResponse = (response) => ({
   success: true,
   response
 });
@@ -25,7 +25,7 @@ const successResponse = response => ({
  *
  * @param {string} message A string indicating the error message.
  */
-const failureMessage = message => ({
+const failureMessage = (message) => ({
   success: false,
   error: {
     message
@@ -37,7 +37,7 @@ const failureMessage = message => ({
  *
  * @param {Error|object} error An object describing the error
  */
-const failureResponse = error => ({
+const failureResponse = (error) => ({
   success: false,
   error
 });
@@ -53,19 +53,26 @@ class Request {
     this.execute = this.execute.bind(this);
   }
 
-  isUrlProtected(url) {
-    const unprotectedResources = ['oauth', 'register'];
+  *makeRequest(url, method, data, headers, timeout) {
+    // start a race between the request and a timer, cancel the loser
+    const { response } = yield race({
+      response: call(axios, {
+        url,
+        method,
+        data,
+        headers
+      }),
+      timeout: delay(timeout)
+    });
 
-    for (const resource of unprotectedResources) {
-      if (url.startsWith(`/${resource}`)) {
-        return false;
-      }
+    if (!response) {
+      return { message: 'Request timed out!' };
     }
 
-    return true;
+    return response;
   }
 
-  *execute({ endpoint, data, headers, options = {} }) {
+  *execute({ endpoint, data, headers = {}, options = {} }) {
     try {
       // ensure the endpoint was supplied
       if (!endpoint) {
@@ -83,25 +90,19 @@ class Request {
         return failureMessage('Endpoint is missing method!');
       }
 
-      // default timeout of 10 seconds
+      // default request timeout of 10 seconds
       const { timeout = 10000 } = options;
 
+      // build the request URL
       const requestUrl = yield call(buildUrl, endpoint);
 
-      // start a race between the request and a timer, cancel the loser
-      const { response } = yield race({
-        response: call(axios, {
-          url: requestUrl,
-          headers,
-          method,
-          data
-        }),
-        timeout: delay(timeout)
-      });
-
-      if (!response) {
-        return failureMessage('Request timed out!');
-      }
+      let response = yield* this.makeRequest(
+        requestUrl,
+        method,
+        data,
+        headers,
+        timeout
+      );
 
       const { status } = response;
       const success = status >= 200 && status < 400;

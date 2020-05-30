@@ -1,9 +1,9 @@
 import { all, fork } from 'redux-saga/effects';
 
-// Repeat imports for each saga
-import example from './example';
+import server from './server';
+import stats from './stats';
+import steam from './steam';
 
-// Added each import to the array (comma separated)
 export default function* saga() {
-  yield all([example].map(fork));
+  yield all([server, stats, steam].map(fork));
 }
