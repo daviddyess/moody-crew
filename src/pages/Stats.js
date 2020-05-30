@@ -117,8 +117,7 @@ export class Stats extends Component {
       actions,
       pager: { page }
     } = this.props;
-    console.log(`page: ${page}`);
-    console.log(`Page: ${Page}`);
+
     if (page !== Page) {
       actions.requestStats({ page: Page });
     }

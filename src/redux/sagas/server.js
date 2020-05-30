@@ -16,7 +16,6 @@ function* requestCSSServerStatusWorker({ server: { host } }) {
     const collection = yield select(getCSSServerStatus);
 
     if (!collection?.name) {
-      console.log('no collection');
       let endpoint = {};
       endpoint = {
         url: `/status/?host=${host}&type=css`,
@@ -31,7 +30,6 @@ function* requestCSSServerStatusWorker({ server: { host } }) {
           }
         } = result;
 
-        console.log(data);
         yield put(actions.requestCSSServerStatusSuccess(data));
       } else if (result.error) {
         throw result.error;
@@ -59,7 +57,6 @@ function* requestCSGOServerStatusWorker({ server: { host } }) {
     const collection = yield select(getCSGOServerStatus);
 
     if (!collection?.name) {
-      console.log('no collection');
       let endpoint = {};
       endpoint = {
         url: `/status/?host=${host}&type=csgo`,
@@ -73,8 +70,6 @@ function* requestCSGOServerStatusWorker({ server: { host } }) {
             data: { data }
           }
         } = result;
-
-        console.log(data);
         yield put(actions.requestCSGOServerStatusSuccess(data));
       } else if (result.error) {
         throw result.error;

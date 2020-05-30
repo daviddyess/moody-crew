@@ -13,7 +13,7 @@ function* requestSteamPlayerWorker({ player: { steam2id } }) {
     yield put(actions.requestSteamLoading(true));
     let cache = yield select(getSteamPlayersCache);
     const player = cache?.[steam2id];
-    console.log('steam');
+
     if (!player?.steamid) {
       let endpoint = {};
       endpoint = {
