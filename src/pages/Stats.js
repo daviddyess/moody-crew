@@ -128,6 +128,11 @@ export class Stats extends Component {
     return time.toFixed(2);
   }
 
+  kd(kills, deaths) {
+    const ratio = kills / deaths;
+    return ratio.toFixed(2);
+  }
+
   render() {
     const {
       collection,
@@ -158,45 +163,63 @@ export class Stats extends Component {
                       <Col md="6" key={`stats-${index}`}>
                         <Card className="mb-2">
                           <Card.Header>
-                            <span className="h6 mr-3">#{rank} </span>
-                            <Link to={`/player/${player.id}`} className="h5">
-                              {player.name}
-                            </Link>
-                            <span className="ml-3">
-                              <span className="p-1"> Score:</span>{' '}
-                              <span className="font-weight-bold h5">
-                                {player.score}
-                              </span>
-                            </span>
+                            <Row>
+                              <Col md="auto">
+                                <span className="h6 mr-3">#{rank} </span>
+                                <Link
+                                  to={`/player/${player.id}`}
+                                  className="h5"
+                                >
+                                  {player.name}
+                                </Link>
+                              </Col>
+                              <Col md="auto">
+                                <span className="p-1"> Score:</span>{' '}
+                                <span className="font-weight-bold h5">
+                                  {player.score}
+                                </span>
+                              </Col>
+                            </Row>
                           </Card.Header>
                           <Card.Body>
-                            <span className="pl-2">
-                              <span className="font-weight-bold  border border-danger bg-danger p-1">
-                                {' '}
-                                Kills:
-                              </span>{' '}
-                              <span className="p-1 border border-danger">
-                                {player.kills}
-                              </span>
-                            </span>
-                            <span className="pl-2">
-                              <span className="font-weight-bold  border border-warning bg-warning p-1">
-                                {' '}
-                                Deaths:
-                              </span>{' '}
-                              <span className="p-1 border border-warning">
-                                {player.deaths}
-                              </span>
-                            </span>
-                            <span className="pl-2">
-                              <span className="font-weight-bold border border-light bg-primary p-1">
-                                {' '}
-                                Time:
-                              </span>{' '}
-                              <span className="p-1 border border-light">
-                                {this.time(player.connected)} hrs
-                              </span>
-                            </span>
+                            <Row>
+                              <Col md="auto" className="p-2">
+                                <span className="font-weight-bold  border border-light bg-light p-1 text-dark">
+                                  {' '}
+                                  K/D:
+                                </span>{' '}
+                                <span className="p-1 border border-light">
+                                  {this.kd(player.kills, player.deaths)}
+                                </span>
+                              </Col>
+                              <Col md="auto" className="p-2">
+                                <span className="font-weight-bold  border border-danger bg-danger p-1">
+                                  {' '}
+                                  Kills:
+                                </span>{' '}
+                                <span className="p-1 border border-danger">
+                                  {player.kills}
+                                </span>
+                              </Col>
+                              <Col md="auto" className="p-2">
+                                <span className="font-weight-bold  border border-warning bg-warning p-1">
+                                  {' '}
+                                  Deaths:
+                                </span>{' '}
+                                <span className="p-1 border border-warning">
+                                  {player.deaths}
+                                </span>
+                              </Col>
+                              <Col md="auto" className="p-2">
+                                <span className="font-weight-bold border border-primary bg-primary p-1">
+                                  {' '}
+                                  Time:
+                                </span>{' '}
+                                <span className="p-1 border border-primary">
+                                  {this.time(player.connected)} hrs
+                                </span>
+                              </Col>
+                            </Row>
                           </Card.Body>
                         </Card>
                       </Col>

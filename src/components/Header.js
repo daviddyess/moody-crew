@@ -21,6 +21,9 @@ export class Header extends Component {
               <Nav.Link as={NavLink} to="/">
                 Home
               </Nav.Link>
+              <Nav.Link as={NavLink} to="/rules">
+                Server Rules
+              </Nav.Link>
               <Nav.Link as={NavLink} to="/stats">
                 Player Stats
               </Nav.Link>
