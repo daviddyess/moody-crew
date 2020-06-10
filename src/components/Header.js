@@ -18,8 +18,11 @@ export class Header extends Component {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="">
+              <Nav.Link as={NavLink} to="/motd">
+                MOTD
+              </Nav.Link>
               <Nav.Link as={NavLink} to="/">
-                Home
+                Server
               </Nav.Link>
               <Nav.Link as={NavLink} to="/rules">
                 Server Rules

@@ -143,7 +143,7 @@ export class Stats extends Component {
     return (
       <Container fluid>
         <Helmet title="Stats" />
-        <h1>Stats</h1>
+        <h3 className="mt-1">Player Stats</h3>
         <Breadcrumbs active="Player Stats" />
         {!loading ? (
           <Fragment>

@@ -31,7 +31,7 @@ export class CSSServerStatus extends Component {
     const server = collection;
     return !loading ? (
       <Fragment>
-        {server ? (
+        {server?.name ? (
           <Card>
             <Card.Header>{server?.name}</Card.Header>
             <ListGroup>
@@ -91,8 +91,13 @@ export class CSSServerStatus extends Component {
           </Card>
         ) : (
           <Card>
-            <Card.Header>{host} is currently offline</Card.Header>
-            <Card.Body></Card.Body>
+            <Card.Header>
+              {host} is currently{' '}
+              <span className="ml-2 text-danger font-weight-bold">Offline</span>
+            </Card.Header>
+            <Card.Body>
+              The server is likely down for maintenance, it will restart soon.
+            </Card.Body>
           </Card>
         )}
       </Fragment>
