@@ -17,7 +17,7 @@ class Home extends Component {
           <Col>
             <h4 className="text-center mt-2">Game Server</h4>
             <CSSServerStatus server={{ host: 'css.moodycrew.us' }} />
-            <CSSServerStatus server={{ host: 'csgo.moodycrew.us' }} />
+            <CSGOServerStatus server={{ host: 'csgo.moodycrew.us' }} />
           </Col>
           <Col>
             <h4 className="text-center mt-2">CSS Server Features</h4>
