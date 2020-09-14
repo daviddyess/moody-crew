@@ -54,15 +54,29 @@ export class CSGOServerStatus extends Component {
                   {server?.raw?.numplayers} / {server?.maxplayers}
                 </span>
                 {server?.raw?.numplayers > 0 ? (
-                  <ListGroup>
-                    <ListGroup.Item></ListGroup.Item>
+                  <ListGroup className="mt-1">
+                    {collection?.players.map((player, index) => {
+                      return (
+                        <Fragment>
+                          <ListGroup.Item>
+                            {player.name}{' '}
+                            <span className="ml-3">
+                              <span className="font-weight-light text-muted">
+                                Score:
+                              </span>{' '}
+                              <span className="ml-1">{player.score}</span>
+                            </span>
+                          </ListGroup.Item>
+                        </Fragment>
+                      );
+                    })}
                   </ListGroup>
                 ) : null}
               </ListGroup.Item>
               <ListGroup.Item>
                 Bots:{' '}
                 <span className="ml-2 font-weight-bold">
-                  {server?.raw?.numbots}
+                  {server?.raw?.numbots} / {server?.raw?.rules?.bot_quota}
                 </span>
               </ListGroup.Item>
               <ListGroup.Item>
@@ -77,8 +91,13 @@ export class CSGOServerStatus extends Component {
           </Card>
         ) : (
           <Card>
-            <Card.Header>{host} is currently offline</Card.Header>
-            <Card.Body></Card.Body>
+            <Card.Header>
+              {host} is currently{' '}
+              <span className="ml-2 text-danger font-weight-bold">Offline</span>
+            </Card.Header>
+            <Card.Body>
+              The server is likely down for maintenance, it will restart soon.
+            </Card.Body>
           </Card>
         )}
       </Fragment>

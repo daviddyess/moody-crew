@@ -5,6 +5,7 @@ import React, { Component } from 'react';
 import { Helmet } from 'react-helmet';
 import { Card, Col, Container, Row } from 'react-bootstrap';
 import CSSServerStatus from 'components/CSSServerStatus';
+import CSGOServerStatus from 'components/CSGOServerStatus';
 
 class Home extends Component {
   render() {
@@ -16,9 +17,10 @@ class Home extends Component {
           <Col>
             <h4 className="text-center mt-2">Game Server</h4>
             <CSSServerStatus server={{ host: 'css.moodycrew.us' }} />
+            <CSSServerStatus server={{ host: 'csgo.moodycrew.us' }} />
           </Col>
           <Col>
-            <h4 className="text-center mt-2">Server Features</h4>
+            <h4 className="text-center mt-2">CSS Server Features</h4>
             <Card>
               <Card.Body>
                 {
@@ -32,6 +34,20 @@ class Home extends Component {
 * Last Man Standing - Knife Fight
 * Rock the Vote, Map Voting, Map Nominations
 * No Block enabled
+`
+                  ).result
+                }
+              </Card.Body>
+            </Card>
+            <h4 className="text-center mt-2">CSGO Server Features</h4>
+            <Card>
+              <Card.Body>
+                {
+                  unified().use(parse).use(remark2react).processSync(
+                    `* All Official CSGO cs_ and de_ Maps enabled
+* Classic Counter-Strike Team Play
+* Per-map optimized settings
+* Rock the Vote, Map Voting, Map Nominations
 `
                   ).result
                 }

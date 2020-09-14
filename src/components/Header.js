@@ -22,7 +22,7 @@ export class Header extends Component {
                 MOTD
               </Nav.Link>
               <Nav.Link as={NavLink} to="/">
-                Server
+                Servers
               </Nav.Link>
               <Nav.Link as={NavLink} to="/rules">
                 Server Rules

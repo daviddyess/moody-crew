@@ -7,6 +7,10 @@ class ServerNews extends Component {
     return (
       <Card className="mb-2">
         <Card.Header className="h4">Welcome</Card.Header>
+        <Card.Body>
+          Visit our CSGO Server: <strong>csgo.moodycrew.us</strong> or{' '}
+          <strong>72.14.188.16</strong>
+        </Card.Body>
         <Card.Body className="bg bg-light text-dark">
           Thanks for joining us!
         </Card.Body>
