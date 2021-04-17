@@ -51,9 +51,10 @@ export class CSSServerStatus extends Component {
               <ListGroup.Item>
                 Players:{' '}
                 <span className="ml-2 font-weight-bold">
-                  {server?.raw?.numplayers} / {server?.maxplayers}
+                  {server?.raw?.numplayers - server?.raw?.numbots} /{' '}
+                  {server?.maxplayers}
                 </span>
-                {server?.raw?.numplayers > 0 ? (
+                {server?.raw?.numplayers - server?.raw?.numbots > 0 ? (
                   <ListGroup className="mt-1">
                     {collection?.players.map((player, index) => {
                       return (
@@ -78,6 +79,25 @@ export class CSSServerStatus extends Component {
                 <span className="ml-2 font-weight-bold">
                   {server?.raw?.numbots} / {server?.raw?.rules?.bot_quota}
                 </span>
+                {server?.raw?.numbots > 0 ? (
+                  <ListGroup className="mt-1">
+                    {collection?.bots.map((player, index) => {
+                      return (
+                        <Fragment>
+                          <ListGroup.Item>
+                            {player.name}{' '}
+                            <span className="ml-3">
+                              <span className="font-weight-light text-muted">
+                                Score:
+                              </span>{' '}
+                              <span className="ml-1">{player.score}</span>
+                            </span>
+                          </ListGroup.Item>
+                        </Fragment>
+                      );
+                    })}
+                  </ListGroup>
+                ) : null}
               </ListGroup.Item>
               <ListGroup.Item>
                 Address:{' '}
