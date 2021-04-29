@@ -8,8 +8,15 @@ class ServerNews extends Component {
       <Card className="mb-2">
         <Card.Header className="h4">Welcome</Card.Header>
         <Card.Body>
-          Visit our CSGO Server: <strong>csgo.moodycrew.us</strong> or{' '}
-          <strong>72.14.188.16</strong>
+          <strong>Bank</strong> Plugin commands (in chat):
+          <ul>
+            <li>!bank : Display bank menu</li>
+            <li>!deposit : Display deposit menu</li>
+            <li>!deposit [amount or all] : Deposit [amount]</li>
+            <li>!withdraw : Display withdrawal menu</li>
+            <li>!withdraw [amount or all] : Withdraw [amount]</li>
+            <li>!bankstatus : Account balance</li>
+          </ul>
         </Card.Body>
         <Card.Body className="bg bg-light text-dark">
           Thanks for joining us!
