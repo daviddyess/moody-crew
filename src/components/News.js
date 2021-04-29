@@ -8,7 +8,7 @@ class ServerNews extends Component {
       <Card className="mb-2">
         <Card.Header className="h4">Welcome</Card.Header>
         <Card.Body>
-          <strong>Bank</strong> Plugin commands (in chat):
+          <h5>Bank commands (in chat):</h5>
           <ul>
             <li>!bank : Display bank menu</li>
             <li>!deposit : Display deposit menu</li>
@@ -17,6 +17,11 @@ class ServerNews extends Component {
             <li>!withdraw [amount or all] : Withdraw [amount]</li>
             <li>!bankstatus : Account balance</li>
           </ul>
+          <p>
+            <strong>Note: </strong>The Bank is disabled during the pistol round
+            and on Gun Game maps. It may be possible to make deposits on some
+            other maps though...
+          </p>
         </Card.Body>
         <Card.Body className="bg bg-light text-dark">
           Thanks for joining us!
