@@ -5,7 +5,6 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import createSagaMiddleware from 'redux-saga';
 import { applyMiddleware, compose, createStore } from 'redux';
-import { LastLocationProvider } from 'react-router-last-location';
 import rootSaga from './redux/sagas';
 import rootReducer from './redux/reducers';
 
@@ -35,11 +34,9 @@ sagaMiddleware.run(rootSaga);
 ReactDOM.render(
   <React.StrictMode>
     <Router basename="/">
-      <LastLocationProvider>
         <Provider store={store}>
           <App />
         </Provider>
-      </LastLocationProvider>
     </Router>
   </React.StrictMode>,
   document.getElementById('root')

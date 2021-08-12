@@ -165,7 +165,7 @@ export class Stats extends Component {
                           <Card.Header>
                             <Row>
                               <Col md="auto">
-                                <span className="h6 mr-3">#{rank} </span>
+                                <span className="h6 me-3">#{rank}</span>
                                 <Link
                                   to={`/player/${player.id}`}
                                   className="h5"

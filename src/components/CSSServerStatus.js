@@ -40,17 +40,17 @@ export class CSSServerStatus extends Component {
               </ListGroup.Item>
               <ListGroup.Item>
                 Status:{' '}
-                <span className="ml-2 text-success font-weight-bold">
+                <span className="ms-2 text-success font-weight-bold">
                   Online
                 </span>
               </ListGroup.Item>
               <ListGroup.Item>
                 Map:{' '}
-                <span className="ml-2 font-weight-bold">{server?.map}</span>
+                <span className="ms-2 font-weight-bold">{server?.map}</span>
               </ListGroup.Item>
               <ListGroup.Item>
                 Players:{' '}
-                <span className="ml-2 font-weight-bold">
+                <span className="ms-2 font-weight-bold">
                   {server?.raw?.numplayers - server?.raw?.numbots} /{' '}
                   {server?.maxplayers}
                 </span>
@@ -61,11 +61,11 @@ export class CSSServerStatus extends Component {
                         <Fragment>
                           <ListGroup.Item>
                             {player.name}{' '}
-                            <span className="ml-3">
+                            <span className="ms-3">
                               <span className="font-weight-light text-muted">
                                 Score:
                               </span>{' '}
-                              <span className="ml-1">{player.score}</span>
+                              <span className="ms-1">{player.score}</span>
                             </span>
                           </ListGroup.Item>
                         </Fragment>
@@ -76,7 +76,7 @@ export class CSSServerStatus extends Component {
               </ListGroup.Item>
               <ListGroup.Item>
                 Bots:{' '}
-                <span className="ml-2 font-weight-bold">
+                <span className="ms-2 font-weight-bold">
                   {server?.raw?.numbots} / {server?.raw?.rules?.bot_quota}
                 </span>
                 {server?.raw?.numbots > 0 ? (
@@ -86,11 +86,11 @@ export class CSSServerStatus extends Component {
                         <Fragment>
                           <ListGroup.Item>
                             {player.name}{' '}
-                            <span className="ml-3">
+                            <span className="ms-3">
                               <span className="font-weight-light text-muted">
                                 Score:
                               </span>{' '}
-                              <span className="ml-1">{player.score}</span>
+                              <span className="ms-1">{player.score}</span>
                             </span>
                           </ListGroup.Item>
                         </Fragment>
@@ -101,11 +101,11 @@ export class CSSServerStatus extends Component {
               </ListGroup.Item>
               <ListGroup.Item>
                 Address:{' '}
-                <span className="ml-2 font-weight-bold">{server?.connect}</span>
+                <span className="ms-2 font-weight-bold">{server?.connect}</span>
               </ListGroup.Item>
               <ListGroup.Item>
                 Avg Ping:{' '}
-                <span className="ml-2 font-weight-bold">{server?.ping}</span>
+                <span className="ms-2 font-weight-bold">{server?.ping}</span>
               </ListGroup.Item>
             </ListGroup>
           </Card>
@@ -113,7 +113,7 @@ export class CSSServerStatus extends Component {
           <Card>
             <Card.Header>
               {host} is currently{' '}
-              <span className="ml-2 text-danger font-weight-bold">Offline</span>
+              <span className="ms-2 text-danger font-weight-bold">Offline</span>
             </Card.Header>
             <Card.Body>
               The server is likely down for maintenance, it will restart soon.

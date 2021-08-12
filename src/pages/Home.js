@@ -1,11 +1,10 @@
-import unified from 'unified';
-import parse from 'remark-parse';
-import remark2react from 'remark-react';
+import { unified } from 'unified';
+import remarkParse from 'remark-parse';
+import remarkReact from 'remark-react';
 import React, { Component } from 'react';
 import { Helmet } from 'react-helmet';
 import { Card, Col, Container, Row } from 'react-bootstrap';
 import CSSServerStatus from 'components/CSSServerStatus';
-import CSGOServerStatus from 'components/CSGOServerStatus';
 
 class Home extends Component {
   render() {
@@ -23,7 +22,10 @@ class Home extends Component {
             <Card>
               <Card.Body>
                 {
-                  unified().use(parse).use(remark2react).processSync(
+                  unified()
+                  .use(remarkParse)
+                  .use(remarkReact, React)
+                  .processSync(
                     `* All Official CS:S Maps enabled + 25 Custom Maps
 * Classic Counter-Strike Team Play
 * GunGame Team Deathmatch by choosing any gg_* Map

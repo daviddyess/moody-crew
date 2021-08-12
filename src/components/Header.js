@@ -11,7 +11,7 @@ export class Header extends Component {
   render() {
     return (
       <Container fluid>
-        <Navbar bg="dark" variant="dark" expand="lg">
+        <Navbar bg="dark" variant="dark" expand="lg" className="px-3">
           <Navbar.Brand as={Link} to="/">
             <h3 className="text-primary">Moody Crew</h3>
           </Navbar.Brand>
