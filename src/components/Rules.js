@@ -12,10 +12,10 @@ class ServerRules extends Component {
             <li className="p-2">No Profanity</li>
             <li className="p-2">No Cheating/Hacks</li>
             <li className="p-2">
-              No Intentional Team Killing{' '}
-              <ul>
-                <li>Server auto-slays the next round for any TK</li>
-              </ul>
+              No Intentional Team Killing
+            </li>
+            <li className="p-2">
+              Be Respectful to other Players
             </li>
           </ol>
         </Card.Body>
