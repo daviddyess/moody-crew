@@ -1,60 +1,64 @@
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import React, { Component, Fragment } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
+import { useQuery } from 'graphql-hooks';
 import { Card, Col, Container, Pagination, Row } from 'react-bootstrap';
 import Loading from 'components/Loading';
-import { actions as statsActions } from 'redux/reducers/stats';
-import { getPager, getStats, isLoading } from 'redux/selectors/stats';
 import { Breadcrumbs } from 'components/Breadcrumbs';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-export class Stats extends Component {
-  static propTypes = {
-    actions: PropTypes.object.isRequired,
-    loading: PropTypes.bool.isRequired,
-    match: PropTypes.object,
-    collection: PropTypes.array,
-    pager: PropTypes.object
-  };
+const Stats = ({ match }) => {
+  const [page, setPage] = useState(Number(match?.params?.page) || 1);
+  const [count] = useState(20);
+  const [stats, setStats] = useState(false);
+  const [pages, setPages] = useState(1);
 
-  constructor(props) {
-    super(props);
-
-    this.navigatePager = this.navigatePager.bind(this);
-  }
-
-  componentDidMount() {
-    const {
-      actions,
-      match: {
-        params: { page }
+  const { loading, data } = useQuery(
+    `query players($count: Int, $page: Int) {
+      players(count: $count, page: $page) {
+        storage
+        totalCount
+        count
+        nodes {
+          id
+          steam
+          name
+          score
+          kills
+          deaths
+          connected
+        }
       }
-    } = this.props;
+    }`,
+    {
+      variables: {
+        count,
+        page
+      }
+    }
+  );
 
-    actions.requestStats({ page: page || 1 });
-  }
+  useEffect(() => {
+    if (data) {
+      setStats(data?.players?.nodes);
+      setPages(Math.ceil(data?.players?.totalCount / count));
+      // eslint-disable-next-line no-console
+      console.log(data?.players?.nodes);
+    }
+  }, [data]);
 
-  componentDidUpdate() {
-    window.scrollTo(0, 0);
-  }
+  const pager = () => {
+    const active = page;
 
-  get pager() {
-    const {
-      pager: { pages, page }
-    } = this.props;
-    const queryParams = this.queryParams;
-    let active = page || queryParams?.p || 1;
-    let items = [];
+    const items = [];
 
     if (page > 2) {
       items.push(
         <Pagination.Item
           as={Link}
           to={`/stats/${1}`}
-          onClick={() => this.navigatePager(1)}
+          onClick={() => setPage(1)}
         >
           <FontAwesomeIcon icon="angle-double-left" />
         </Pagination.Item>
@@ -63,7 +67,7 @@ export class Stats extends Component {
         <Pagination.Item
           as={Link}
           to={`/stats/${page - 1}`}
-          onClick={() => this.navigatePager(page - 1)}
+          onClick={() => setPage(page - 1)}
         >
           <FontAwesomeIcon icon="chevron-left" />
         </Pagination.Item>
@@ -81,7 +85,7 @@ export class Stats extends Component {
           key={number}
           active={number === active}
           to={`/stats/${number}`}
-          onClick={() => this.navigatePager(number)}
+          onClick={() => setPage(number)}
         >
           {number}
         </Pagination.Item>
@@ -93,7 +97,7 @@ export class Stats extends Component {
         <Pagination.Item
           as={Link}
           to={`/stats/${page + 1}`}
-          onClick={() => this.navigatePager(page + 1)}
+          onClick={() => setPage(page + 1)}
         >
           <FontAwesomeIcon icon="chevron-right" />
         </Pagination.Item>
@@ -102,7 +106,7 @@ export class Stats extends Component {
         <Pagination.Item
           as={Link}
           to={`/stats/${pages}`}
-          onClick={() => this.navigatePager(pages)}
+          onClick={() => setPage(pages)}
         >
           <FontAwesomeIcon icon="angle-double-right" />
         </Pagination.Item>
@@ -110,163 +114,138 @@ export class Stats extends Component {
     }
 
     return items;
-  }
+  };
 
-  navigatePager(Page) {
-    const {
-      actions,
-      pager: { page }
-    } = this.props;
+  const time = (sec) => {
+    const hours = sec / 60 / 60;
 
-    if (page !== Page) {
-      actions.requestStats({ page: Page });
-    }
-  }
+    return hours.toFixed(2);
+  };
 
-  time(time) {
-    time = time / 60 / 60;
-    return time.toFixed(2);
-  }
-
-  kd(kills, deaths) {
+  const kd = (kills, deaths) => {
     const ratio = kills / deaths;
+
     return ratio.toFixed(2);
-  }
+  };
 
-  render() {
-    const {
-      collection,
-      loading,
-      pager: { pages, page, count }
-    } = this.props;
+  return (
+    <Container fluid>
+      <Helmet title="Stats" />
+      <h3 className="mt-1">Player Stats</h3>
+      <Breadcrumbs active="Player Stats" />
+      {!loading ? (
+        <>
+          {stats?.map && stats?.length > 0 ? (
+            <>
+              <Row className="mb-2">
+                <Col>{data?.players?.totalCount} Players since last reset.</Col>
+                <Col className="text-end">
+                  Page {page} / {pages}
+                </Col>
+              </Row>
 
-    return (
-      <Container fluid>
-        <Helmet title="Stats" />
-        <h3 className="mt-1">Player Stats</h3>
-        <Breadcrumbs active="Player Stats" />
-        {!loading ? (
-          <Fragment>
-            {collection?.map && collection.length > 0 ? (
-              <Fragment>
-                <Row className="mb-2">
-                  <Col>{count} Players since last reset.</Col>
-                  <Col className="text-right">
-                    Page {page} / {pages}
-                  </Col>
-                </Row>
+              <Row>
+                {stats?.map((player, index) => {
+                  const rank = Number(page) * 20 - 20 + index + 1;
 
-                <Row>
-                  {collection.map((player, index) => {
-                    const rank = Number(page) * 20 - 20 + index + 1;
-                    return (
-                      <Col md="6" key={`stats-${index}`}>
-                        <Card className="mb-2">
-                          <Card.Header>
-                            <Row>
-                              <Col md="auto">
-                                <span className="h6 me-3">#{rank}</span>
-                                <Link
-                                  to={`/player/${player.id}`}
-                                  className="h5"
-                                >
-                                  {player.name}
-                                </Link>
-                              </Col>
-                              <Col md="auto">
-                                <span className="p-1"> Score:</span>{' '}
-                                <span className="font-weight-bold h5">
-                                  {player.score}
-                                </span>
-                              </Col>
-                            </Row>
-                          </Card.Header>
-                          <Card.Body>
-                            <Row>
-                              <Col md="auto" className="p-2">
-                                <span className="font-weight-bold  border border-light bg-light p-1 text-dark">
-                                  {' '}
-                                  K/D:
-                                </span>{' '}
-                                <span className="p-1 border border-light">
-                                  {this.kd(player.kills, player.deaths)}
-                                </span>
-                              </Col>
-                              <Col md="auto" className="p-2">
-                                <span className="font-weight-bold  border border-danger bg-danger p-1">
-                                  {' '}
-                                  Kills:
-                                </span>{' '}
-                                <span className="p-1 border border-danger">
-                                  {player.kills}
-                                </span>
-                              </Col>
-                              <Col md="auto" className="p-2">
-                                <span className="font-weight-bold  border border-warning bg-warning p-1">
-                                  {' '}
-                                  Deaths:
-                                </span>{' '}
-                                <span className="p-1 border border-warning">
-                                  {player.deaths}
-                                </span>
-                              </Col>
-                              <Col md="auto" className="p-2">
-                                <span className="font-weight-bold border border-primary bg-primary p-1">
-                                  {' '}
-                                  Time:
-                                </span>{' '}
-                                <span className="p-1 border border-primary">
-                                  {this.time(player.connected)} hrs
-                                </span>
-                              </Col>
-                            </Row>
-                          </Card.Body>
-                        </Card>
-                      </Col>
-                    );
-                  })}
-                </Row>
-              </Fragment>
-            ) : null}
-            {collection.length === 0 ? (
-              <Card text="info" border="info" className="mt-2 mb-2">
-                <Card.Body>
-                  <Card.Title>No Stats Available</Card.Title>
-                </Card.Body>
-              </Card>
-            ) : null}
-          </Fragment>
-        ) : (
-          <Loading />
-        )}
-        {pages && pages > 1 ? (
-          <Fragment>
-            <Row className="justify-content-md-center mt-4">
-              <Col md="auto">
-                <Pagination>{this.pager}</Pagination>
-              </Col>
-            </Row>
-            <Row className="mt-2">
-              <Col>Total: {count}</Col>
-              <Col className="text-right">
-                Page {page} / {pages}
-              </Col>
-            </Row>
-          </Fragment>
-        ) : null}
-      </Container>
-    );
-  }
-}
+                  return (
+                    <Col md="6" key={`stats-${index}`}>
+                      <Card className="mb-2">
+                        <Card.Header>
+                          <Row>
+                            <Col md="auto">
+                              <span className="h6 me-3">#{rank}</span>
+                              <Link to={`/player/${player.id}`} className="h5">
+                                {player.name}
+                              </Link>
+                            </Col>
+                            <Col md="auto">
+                              <span className="p-1"> Score:</span>{' '}
+                              <span className="font-weight-bold h5">
+                                {player.score}
+                              </span>
+                            </Col>
+                          </Row>
+                        </Card.Header>
+                        <Card.Body>
+                          <Row>
+                            <Col md="auto" className="p-2">
+                              <span className="font-weight-bold  border border-light bg-light p-1 text-dark">
+                                {' '}
+                                K/D:
+                              </span>{' '}
+                              <span className="p-1 border border-light">
+                                {kd(player.kills, player.deaths)}
+                              </span>
+                            </Col>
+                            <Col md="auto" className="p-2">
+                              <span className="font-weight-bold  border border-danger bg-danger p-1">
+                                {' '}
+                                Kills:
+                              </span>{' '}
+                              <span className="p-1 border border-danger">
+                                {player.kills}
+                              </span>
+                            </Col>
+                            <Col md="auto" className="p-2">
+                              <span className="font-weight-bold  border border-warning bg-warning p-1">
+                                {' '}
+                                Deaths:
+                              </span>{' '}
+                              <span className="p-1 border border-warning">
+                                {player.deaths}
+                              </span>
+                            </Col>
+                            <Col md="auto" className="p-2">
+                              <span className="font-weight-bold border border-primary bg-primary p-1">
+                                {' '}
+                                Time:
+                              </span>{' '}
+                              <span className="p-1 border border-primary">
+                                {time(player.connected)} hrs
+                              </span>
+                            </Col>
+                          </Row>
+                        </Card.Body>
+                      </Card>
+                    </Col>
+                  );
+                })}
+              </Row>
+            </>
+          ) : null}
+          {stats?.length === 0 ? (
+            <Card text="info" border="info" className="mt-2 mb-2">
+              <Card.Body>
+                <Card.Title>No Stats Available</Card.Title>
+              </Card.Body>
+            </Card>
+          ) : null}
+        </>
+      ) : (
+        <Loading />
+      )}
+      {pages && pages > 1 ? (
+        <>
+          <Row className="justify-content-md-center mt-4">
+            <Col md="auto">
+              <Pagination>{pager()}</Pagination>
+            </Col>
+          </Row>
+          <Row className="mt-2">
+            <Col>Total: {data?.players?.totalCount}</Col>
+            <Col className="text-end">
+              Page {page} / {pages}
+            </Col>
+          </Row>
+        </>
+      ) : null}
+    </Container>
+  );
+};
 
-const mapStateToProps = (state) => ({
-  loading: isLoading(state),
-  collection: getStats(state),
-  pager: getPager(state)
-});
+Stats.propTypes = {
+  match: PropTypes.object
+};
 
-const mapDispatchToProps = (dispatch) => ({
-  actions: bindActionCreators({ ...statsActions }, dispatch)
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Stats);
+export default Stats;
