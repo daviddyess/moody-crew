@@ -1,6 +1,6 @@
 {
-  "name": "react-boilerplate",
-  "version": "0.5.0",
+  "name": "moody-crew",
+  "version": "2.0.0",
   "private": false,
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.36",
