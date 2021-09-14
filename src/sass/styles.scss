@@ -17,8 +17,8 @@ blockquote,
   quotes: "\201C""\201D""\2018""\2019";
 }
 
-blockquote:before,
-.blockquote:before {
+blockquote::before,
+.blockquote::before {
   color: #ccc;
   content: open-quote;
   font-size: 4em;
@@ -27,8 +27,8 @@ blockquote:before,
   vertical-align: -0.4em;
 }
 
-blockquote:after,
-.blockquote:after {
+blockquote::after,
+.blockquote::after {
   color: #ccc;
   content: no-close-quote;
   font-size: 4em;
@@ -39,4 +39,8 @@ blockquote:after,
 
 blockquote p {
   display: inline;
+}
+
+.navbar {
+  padding: 0;
 }
