@@ -1,5 +1,7 @@
 {
   "singleQuote": true,
+  "trailingComma": "none",
+  "endOfLine": "auto",
   "overrides": [
     {
       "files": "src/**/*.scss",
@@ -7,6 +9,5 @@
         "singleQuote": false
       }
     }
-  ],
-  "trailingComma": "none"
+  ]
 }

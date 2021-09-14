@@ -1,50 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
+import { GraphQLClient, ClientContext } from 'graphql-hooks';
 
-import { Provider } from 'react-redux';
-import createSagaMiddleware from 'redux-saga';
-import { applyMiddleware, compose, createStore } from 'redux';
-import rootSaga from './redux/sagas';
-import rootReducer from './redux/reducers';
+import 'icons';
+import 'index.scss';
 
-import './icons';
-import './index.scss';
+import App from 'components/App';
 
-import App from './components/App';
-import * as serviceWorker from './serviceWorker';
-
-/* eslint-disable no-underscore-dangle */
-const composer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-/* eslint-enable */
-
-const sagaMiddleware = createSagaMiddleware();
-const enhancers = composer(applyMiddleware(sagaMiddleware));
-
-export const store = createStore(rootReducer, enhancers);
-
-if (module.hot) {
-  module.hot.accept('./redux/reducers', () => {
-    store.replaceReducer(require('./redux/reducers').default);
-  });
-}
-
-sagaMiddleware.run(rootSaga);
+const client = new GraphQLClient({
+  url: process.env.REACT_APP_API_URL
+});
 
 ReactDOM.render(
-  <React.StrictMode>
-    <Router basename="/">
-        <Provider store={store}>
-          <App />
-        </Provider>
-    </Router>
-  </React.StrictMode>,
+  <Router basename="/">
+    <ClientContext.Provider value={client}>
+      <App />
+    </ClientContext.Provider>
+  </Router>,
+
   document.getElementById('root')
 );
-
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
 
 export default App;

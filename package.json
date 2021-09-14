@@ -1,6 +1,6 @@
 {
-  "name": "react-boilerplate",
-  "version": "0.5.0",
+  "name": "moody-crew",
+  "version": "2.0.0",
   "private": false,
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.36",
@@ -11,13 +11,19 @@
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^12.0.0",
     "@testing-library/user-event": "^13.2.1",
+    "@types/eslint-plugin-prettier": "^3.1.0",
     "axios": "^0.21.1",
     "bootstrap": "^5.1.0",
     "bootswatch": "^5.1.0",
     "dayjs": "^1.10.6",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^3.4.0",
     "final-form": "^4.20.2",
+    "graphql-hooks": "^5.4.0",
     "nanoid": "^3.1.24",
     "node-sass": "^6.0.1",
+    "prettier": "^2.3.1",
+    "prettier-eslint": "^12.0.0",
     "react": "^17.0.2",
     "react-bootstrap": "^1.6.1",
     "react-dom": "^17.0.2",
@@ -33,7 +39,12 @@
     "remark-react": "^9.0.0",
     "reselect": "^4.0.0",
     "string-sanitizer": "^2.0.2",
-    "unified": "^10.1.0"
+    "stylelint": "^13.13.1",
+    "stylelint-a11y": "^1.2.3",
+    "stylelint-config-prettier": "^8.0.2",
+    "stylelint-config-recommended": "^5.0.0",
+    "unified": "^10.1.0",
+    "web-vitals": "^1.1.2"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -42,7 +53,10 @@
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
-    "extends": "react-app"
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
   },
   "browserslist": {
     "production": [
