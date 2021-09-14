@@ -10,17 +10,14 @@ export class Header extends Component {
 
   render() {
     return (
-      <Container fluid>
-        <Navbar bg="dark" variant="dark" expand="lg" className="px-3">
+      <Navbar bg="dark" variant="dark" expand="lg">
+        <Container fluid>
           <Navbar.Brand as={Link} to="/">
-            <h3 className="text-primary">Moody Crew</h3>
+            <h3 className="text-warning">Moody Crew</h3>
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="">
-              <Nav.Link as={NavLink} to="/motd">
-                MOTD
-              </Nav.Link>
               <Nav.Link as={NavLink} to="/">
                 Servers
               </Nav.Link>
@@ -30,10 +27,13 @@ export class Header extends Component {
               <Nav.Link as={NavLink} to="/stats">
                 Player Stats
               </Nav.Link>
+              <Nav.Link as={NavLink} to="/motd">
+                MOTD
+              </Nav.Link>
             </Nav>
           </Navbar.Collapse>
-        </Navbar>
-      </Container>
+        </Container>
+      </Navbar>
     );
   }
 }

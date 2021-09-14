@@ -117,7 +117,8 @@ export const Player = ({ match }) => {
           <Helmet title={`${stats?.name} | Stats`} />
           {stats?.id ? (
             <>
-              <h1>{stats.name}</h1>
+              <h1 className="bg-secondary ps-2">{stats.name}</h1>
+
               <Breadcrumbs
                 links={[{ name: 'Player Stats', url: '/stats' }]}
                 active={stats.name}
@@ -157,7 +158,7 @@ export const Player = ({ match }) => {
                   <Card className="mb-2" bg="danger">
                     <Card.Body>
                       <h5>
-                        <span className="h3 mr-2">{stats.kills}</span>
+                        <span className="h3 me-2">{stats.kills}</span>
                         Kills
                       </h5>
                     </Card.Body>
@@ -166,7 +167,7 @@ export const Player = ({ match }) => {
                   <Card className="mb-2" bg="dark">
                     <Card.Body>
                       <h5>
-                        <span className="h3 mr-2">{stats.deaths}</span>
+                        <span className="h3 me-2">{stats.deaths}</span>
                         Deaths
                       </h5>
                     </Card.Body>
@@ -179,13 +180,13 @@ export const Player = ({ match }) => {
                     </Card.Header>
                     <Card.Body>
                       <h5>
-                        <span className="h3 mr-2 text-danger">
+                        <span className="h3 me-2 text-danger">
                           {stats.rounds_tr}
                         </span>{' '}
                         Rounds
                       </h5>
                       <h5>
-                        <span className="h3 mr-2 text-danger">
+                        <span className="h3 me-2 text-danger">
                           {stats.tr_win}
                         </span>{' '}
                         Wins
@@ -217,13 +218,13 @@ export const Player = ({ match }) => {
                     </Card.Header>
                     <Card.Body>
                       <h5>
-                        <span className="h3 mr-2 text-primary">
+                        <span className="h3 me-2 text-primary">
                           {stats.rounds_ct}
                         </span>{' '}
                         Rounds
                       </h5>
                       <h5>
-                        <span className="h3 mr-2 text-primary">
+                        <span className="h3 me-2 text-primary">
                           {stats.ct_win}
                         </span>{' '}
                         Wins
@@ -272,37 +273,37 @@ export const Player = ({ match }) => {
                         Head
                       </h5>
                       <h5>
-                        <span className="h3 mr-2 text-success">
+                        <span className="h3 me-2 text-success">
                           {stats.chest}
                         </span>{' '}
                         Chest
                       </h5>
                       <h5>
-                        <span className="h3 mr-2 text-success">
+                        <span className="h3 me-2 text-success">
                           {stats.stomach}
                         </span>{' '}
                         Stomach
                       </h5>
                       <h5>
-                        <span className="h3 mr-2 text-success">
+                        <span className="h3 me-2 text-success">
                           {stats.left_arm}
                         </span>{' '}
                         Left Arm
                       </h5>
                       <h5>
-                        <span className="h3 mr-2 text-success">
+                        <span className="h3 me-2 text-success">
                           {stats.right_arm}
                         </span>{' '}
                         Right Arm
                       </h5>
                       <h5>
-                        <span className="h3 mr-2 text-success">
+                        <span className="h3 me-2 text-success">
                           {stats.left_leg}
                         </span>{' '}
                         Left Leg
                       </h5>
                       <h5>
-                        <span className="h3 mr-2 text-success">
+                        <span className="h3 me-2 text-success">
                           {stats.right_leg}
                         </span>{' '}
                         Right Leg
@@ -314,7 +315,7 @@ export const Player = ({ match }) => {
                   <Card className="mb-2" bg="danger">
                     <Card.Body>
                       <h5>
-                        <span className="h3 mr-2">{stats.hits}</span>
+                        <span className="h3 me-2">{stats.hits}</span>
                         Hits
                       </h5>
                     </Card.Body>
@@ -330,19 +331,19 @@ export const Player = ({ match }) => {
                     </Card.Header>
                     <Card.Body>
                       <h5>
-                        <span className="h3 mr-2 text-warning">
+                        <span className="h3 me-2 text-warning">
                           {stats.knife}
                         </span>{' '}
                         Melee
                       </h5>
                       <h5>
-                        <span className="h3 mr-2 text-warning">
+                        <span className="h3 me-2 text-warning">
                           {stats.headshots}
                         </span>{' '}
                         Headhots
                       </h5>
                       <h5>
-                        <span className="h3 mr-2 text-warning">
+                        <span className="h3 me-2 text-warning">
                           {stats.hegrenade}
                         </span>{' '}
                         Grenades
@@ -352,7 +353,7 @@ export const Player = ({ match }) => {
                   <Card className="mb-2" bg="light" text="dark">
                     <Card.Body>
                       <h5>
-                        <span className="h3 mr-2">{stats.tk}</span>
+                        <span className="h3 me-2">{stats.tk}</span>
                         Team Kills
                       </h5>
                     </Card.Body>
@@ -360,7 +361,7 @@ export const Player = ({ match }) => {
                   <Card className="mb-2" bg="light" text="dark">
                     <Card.Body>
                       <h5>
-                        <span className="h3 mr-2">{stats.suicides}</span>
+                        <span className="h3 me-2">{stats.suicides}</span>
                         Suicides
                       </h5>
                     </Card.Body>
@@ -375,30 +376,30 @@ export const Player = ({ match }) => {
                     </Card.Header>
                     <Card.Body>
                       <h5>
-                        <span className="h3 mr-2 text-info">{stats.glock}</span>{' '}
+                        <span className="h3 me-2 text-info">{stats.glock}</span>{' '}
                         Glock
                       </h5>
                       <h5>
-                        <span className="h3 mr-2 text-info">{stats.usp}</span>{' '}
+                        <span className="h3 me-2 text-info">{stats.usp}</span>{' '}
                         USP
                       </h5>
                       <h5>
-                        <span className="h3 mr-2 text-info">{stats.p228}</span>{' '}
+                        <span className="h3 me-2 text-info">{stats.p228}</span>{' '}
                         P228
                       </h5>
 
                       <h5>
-                        <span className="h3 mr-2 text-info">
+                        <span className="h3 me-2 text-info">
                           {stats.deagle}
                         </span>{' '}
                         Desert Eagle
                       </h5>
                       <h5>
-                        <span className="h3 mr-2 text-info">{stats.elite}</span>{' '}
+                        <span className="h3 me-2 text-info">{stats.elite}</span>{' '}
                         Duals
                       </h5>
                       <h5>
-                        <span className="h3 mr-2 text-info">
+                        <span className="h3 me-2 text-info">
                           {stats.fiveseven}
                         </span>{' '}
                         Five Seven
@@ -413,11 +414,11 @@ export const Player = ({ match }) => {
                     </Card.Header>
                     <Card.Body>
                       <h5>
-                        <span className="h3 mr-2 text-info">{stats.m3}</span> M3
+                        <span className="h3 me-2 text-info">{stats.m3}</span> M3
                       </h5>
 
                       <h5>
-                        <span className="h3 mr-2 text-info">
+                        <span className="h3 me-2 text-info">
                           {stats.xm1014}
                         </span>{' '}
                         XM1014
@@ -430,7 +431,7 @@ export const Player = ({ match }) => {
                     </Card.Header>
                     <Card.Body>
                       <h5>
-                        <span className="h3 mr-2 text-info">{stats.m249}</span>{' '}
+                        <span className="h3 me-2 text-info">{stats.m249}</span>{' '}
                         M249
                       </h5>
                     </Card.Body>
@@ -443,29 +444,29 @@ export const Player = ({ match }) => {
                     </Card.Header>
                     <Card.Body>
                       <h5>
-                        <span className="h3 mr-2 text-info">{stats.mac10}</span>{' '}
+                        <span className="h3 me-2 text-info">{stats.mac10}</span>{' '}
                         MAC10
                       </h5>
 
                       <h5>
-                        <span className="h3 mr-2 text-info">{stats.tmp}</span>{' '}
+                        <span className="h3 me-2 text-info">{stats.tmp}</span>{' '}
                         TMP
                       </h5>
 
                       <h5>
-                        <span className="h3 mr-2 text-info">
+                        <span className="h3 me-2 text-info">
                           {stats.mp5navy}
                         </span>{' '}
                         MP5
                       </h5>
 
                       <h5>
-                        <span className="h3 mr-2 text-info">{stats.ump45}</span>{' '}
+                        <span className="h3 me-2 text-info">{stats.ump45}</span>{' '}
                         UMP 45
                       </h5>
 
                       <h5>
-                        <span className="h3 mr-2 text-info">{stats.p90}</span>{' '}
+                        <span className="h3 me-2 text-info">{stats.p90}</span>{' '}
                         P90
                       </h5>
                     </Card.Body>
@@ -478,32 +479,32 @@ export const Player = ({ match }) => {
                     </Card.Header>
                     <Card.Body>
                       <h5>
-                        <span className="h3 mr-2 text-info">{stats.galil}</span>{' '}
+                        <span className="h3 me-2 text-info">{stats.galil}</span>{' '}
                         Galil
                       </h5>
 
                       <h5>
-                        <span className="h3 mr-2 text-info">{stats.ak47}</span>{' '}
+                        <span className="h3 me-2 text-info">{stats.ak47}</span>{' '}
                         AK47
                       </h5>
 
                       <h5>
-                        <span className="h3 mr-2 text-info">{stats.sg550}</span>{' '}
+                        <span className="h3 me-2 text-info">{stats.sg550}</span>{' '}
                         SG550
                       </h5>
 
                       <h5>
-                        <span className="h3 mr-2 text-info">{stats.aug}</span>{' '}
+                        <span className="h3 me-2 text-info">{stats.aug}</span>{' '}
                         AUG
                       </h5>
 
                       <h5>
-                        <span className="h3 mr-2 text-info">{stats.famas}</span>{' '}
+                        <span className="h3 me-2 text-info">{stats.famas}</span>{' '}
                         Famas
                       </h5>
 
                       <h5>
-                        <span className="h3 mr-2 text-info">{stats.m4a1}</span>{' '}
+                        <span className="h3 me-2 text-info">{stats.m4a1}</span>{' '}
                         M4A1
                       </h5>
                     </Card.Body>
@@ -516,22 +517,22 @@ export const Player = ({ match }) => {
                     </Card.Header>
                     <Card.Body>
                       <h5>
-                        <span className="h3 mr-2 text-info">{stats.scout}</span>{' '}
+                        <span className="h3 me-2 text-info">{stats.scout}</span>{' '}
                         Scout
                       </h5>
 
                       <h5>
-                        <span className="h3 mr-2 text-info">{stats.sg552}</span>{' '}
+                        <span className="h3 me-2 text-info">{stats.sg552}</span>{' '}
                         SG552
                       </h5>
 
                       <h5>
-                        <span className="h3 mr-2 text-info">{stats.awp}</span>{' '}
+                        <span className="h3 me-2 text-info">{stats.awp}</span>{' '}
                         AWP
                       </h5>
 
                       <h5>
-                        <span className="h3 mr-2 text-info">{stats.g3sg1}</span>{' '}
+                        <span className="h3 me-2 text-info">{stats.g3sg1}</span>{' '}
                         G3SG1
                       </h5>
                     </Card.Body>

@@ -43,8 +43,6 @@ const Stats = ({ match }) => {
     if (data) {
       setStats(data?.players?.nodes);
       setPages(Math.ceil(data?.players?.totalCount / count));
-      // eslint-disable-next-line no-console
-      console.log(data?.players?.nodes);
     }
   }, [data]);
 
@@ -57,6 +55,7 @@ const Stats = ({ match }) => {
       items.push(
         <Pagination.Item
           as={Link}
+          key="first"
           to={`/stats/${1}`}
           onClick={() => setPage(1)}
         >
@@ -66,6 +65,7 @@ const Stats = ({ match }) => {
       items.push(
         <Pagination.Item
           as={Link}
+          key="previous"
           to={`/stats/${page - 1}`}
           onClick={() => setPage(page - 1)}
         >
@@ -96,6 +96,7 @@ const Stats = ({ match }) => {
       items.push(
         <Pagination.Item
           as={Link}
+          key="next"
           to={`/stats/${page + 1}`}
           onClick={() => setPage(page + 1)}
         >
@@ -105,6 +106,7 @@ const Stats = ({ match }) => {
       items.push(
         <Pagination.Item
           as={Link}
+          key="last"
           to={`/stats/${pages}`}
           onClick={() => setPage(pages)}
         >
@@ -131,7 +133,7 @@ const Stats = ({ match }) => {
   return (
     <Container fluid>
       <Helmet title="Stats" />
-      <h3 className="mt-1">Player Stats</h3>
+      <h4 className="my-2">Player Stats</h4>
       <Breadcrumbs active="Player Stats" />
       {!loading ? (
         <>
@@ -227,13 +229,11 @@ const Stats = ({ match }) => {
       )}
       {pages && pages > 1 ? (
         <>
-          <Row className="justify-content-md-center mt-4">
+          <Row className="justify-content-md-center">
+            <Col>Total: {data?.players?.totalCount}</Col>
             <Col md="auto">
               <Pagination>{pager()}</Pagination>
             </Col>
-          </Row>
-          <Row className="mt-2">
-            <Col>Total: {data?.players?.totalCount}</Col>
             <Col className="text-end">
               Page {page} / {pages}
             </Col>

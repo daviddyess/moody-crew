@@ -3,17 +3,19 @@ import { Helmet } from 'react-helmet';
 import { Col, Container, Row } from 'react-bootstrap';
 import ServerRules from 'components/Rules';
 import ServerNews from 'components/News';
+import TopStats from 'components/TopStats';
 
 const Home = () => {
   return (
     <Container fluid>
       <Helmet title="Welcome" />
-      <Row className="mt-4">
-        <Col>
+      <Row className="mt-2">
+        <Col md={4} sm={12} xs={12}>
           <ServerRules />
-        </Col>
-        <Col>
           <ServerNews />
+        </Col>
+        <Col md={8} sm={12} xs={12}>
+          <TopStats count={10} />
         </Col>
       </Row>
     </Container>

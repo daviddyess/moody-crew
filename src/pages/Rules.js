@@ -7,7 +7,7 @@ const Rules = () => {
   return (
     <Container fluid>
       <Helmet title="Home" />
-      <Row className="mt-4">
+      <Row className="mt-2">
         <Col>
           <ServerRules />
         </Col>

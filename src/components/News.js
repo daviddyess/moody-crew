@@ -4,7 +4,7 @@ import { Card } from 'react-bootstrap';
 
 const ServerNews = () => {
   return (
-    <Card className="mb-2">
+    <Card className="mt-2">
       <Card.Header className="h4">Welcome</Card.Header>
       <Card.Body>
         <h5>Bank commands (in chat):</h5>

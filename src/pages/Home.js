@@ -9,19 +9,25 @@ const Home = () => {
       <Helmet title="Home" />
 
       <Row>
-        <Col>
+        <Col md={6} sm={12} xs={12}>
           <h4 className="text-center mt-2">Game Server</h4>
           <GameServer host="css.moodycrew.us" type="css" />
         </Col>
-        <Col>
+        <Col md={6} sm={12} xs={12}>
           <h4 className="text-center mt-2">CSS Server Features</h4>
           <Card>
             <Card.Body>
-              * All Official CS:S Maps enabled + 25 Custom Maps * Classic
-              Counter-Strike Team Play * GunGame Team Deathmatch by choosing any
-              gg_* Map * Per-map optimized settings * Player Stats and Ranking *
-              Damage Report * Last Man Standing - Knife Fight * Rock the Vote,
-              Map Voting, Map Nominations * No Block enabled
+              <ul>
+                <li>All Official CS:S Maps enabled + 25 Custom Maps</li>
+                <li>Classic Counter-Strike Team Play</li>
+                <li>GunGame Team Deathmatch by choosing any gg_* Map</li>
+                <li>Per-map optimized settings</li>
+                <li>Player Stats and Ranking</li>
+                <li>Damage Report</li>
+                <li>Last Man Standing - Knife Fight</li>
+                <li>Rock the Vote, Map Voting, Map Nominations</li>
+                <li>No Block enabled</li>
+              </ul>
             </Card.Body>
           </Card>
         </Col>
